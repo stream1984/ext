@@ -31,187 +31,208 @@ var RouteMatcher = function(j_val) {
   var that = this;
 
   this.accept = function(request) {
-    return new RouteMatcher(j_routeMatcher.accept(request._jdel()));
+    j_routeMatcher.accept(request._jdel());
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP GET
   */
   this.get = function(pattern, handler) {
-    return new RouteMatcher(j_routeMatcher.get(pattern, function(jVal) {
+    j_routeMatcher.get(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP PUT
   */
   this.put = function(pattern, handler) {
-    return new RouteMatcher(j_routeMatcher.put(pattern, function(jVal) {
+    j_routeMatcher.put(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP POST
   */
   this.post = function(pattern, handler) {
-    return new RouteMatcher(j_routeMatcher.post(pattern, function(jVal) {
+    j_routeMatcher.post(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP DELETE
   */
   this.delete = function(pattern, handler) {
-    return new RouteMatcher(j_routeMatcher.delete(pattern, function(jVal) {
+    j_routeMatcher.delete(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP OPTIONS
   */
   this.options = function(pattern, handler) {
-    return new RouteMatcher(j_routeMatcher.options(pattern, function(jVal) {
+    j_routeMatcher.options(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP HEAD
   */
   this.head = function(pattern, handler) {
-    return new RouteMatcher(j_routeMatcher.head(pattern, function(jVal) {
+    j_routeMatcher.head(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP TRACE
   */
   this.trace = function(pattern, handler) {
-    return new RouteMatcher(j_routeMatcher.trace(pattern, function(jVal) {
+    j_routeMatcher.trace(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP CONNECT
   */
   this.connect = function(pattern, handler) {
-    return new RouteMatcher(j_routeMatcher.connect(pattern, function(jVal) {
+    j_routeMatcher.connect(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP PATCH
   */
   this.patch = function(pattern, handler) {
-    return new RouteMatcher(j_routeMatcher.patch(pattern, function(jVal) {
+    j_routeMatcher.patch(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for all HTTP methods
   */
   this.all = function(pattern, handler) {
-    return new RouteMatcher(j_routeMatcher.all(pattern, function(jVal) {
+    j_routeMatcher.all(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP GET
   */
   this.getWithRegEx = function(regex, handler) {
-    return new RouteMatcher(j_routeMatcher.getWithRegEx(regex, function(jVal) {
+    j_routeMatcher.getWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP PUT
   */
   this.putWithRegEx = function(regex, handler) {
-    return new RouteMatcher(j_routeMatcher.putWithRegEx(regex, function(jVal) {
+    j_routeMatcher.putWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP POST
   */
   this.postWithRegEx = function(regex, handler) {
-    return new RouteMatcher(j_routeMatcher.postWithRegEx(regex, function(jVal) {
+    j_routeMatcher.postWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP DELETE
   */
   this.deleteWithRegEx = function(regex, handler) {
-    return new RouteMatcher(j_routeMatcher.deleteWithRegEx(regex, function(jVal) {
+    j_routeMatcher.deleteWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP OPTIONS
   */
   this.optionsWithRegEx = function(regex, handler) {
-    return new RouteMatcher(j_routeMatcher.optionsWithRegEx(regex, function(jVal) {
+    j_routeMatcher.optionsWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP HEAD
   */
   this.headWithRegEx = function(regex, handler) {
-    return new RouteMatcher(j_routeMatcher.headWithRegEx(regex, function(jVal) {
+    j_routeMatcher.headWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP TRACE
   */
   this.traceWithRegEx = function(regex, handler) {
-    return new RouteMatcher(j_routeMatcher.traceWithRegEx(regex, function(jVal) {
+    j_routeMatcher.traceWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP CONNECT
   */
   this.connectWithRegEx = function(regex, handler) {
-    return new RouteMatcher(j_routeMatcher.connectWithRegEx(regex, function(jVal) {
+    j_routeMatcher.connectWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for a matching HTTP PATCH
   */
   this.patchWithRegEx = function(regex, handler) {
-    return new RouteMatcher(j_routeMatcher.patchWithRegEx(regex, function(jVal) {
+    j_routeMatcher.patchWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
    Specify a handler that will be called for all HTTP methods
   */
   this.allWithRegEx = function(regex, handler) {
-    return new RouteMatcher(j_routeMatcher.allWithRegEx(regex, function(jVal) {
+    j_routeMatcher.allWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   /*
@@ -220,9 +241,10 @@ var RouteMatcher = function(j_val) {
   
   */
   this.noMatch = function(handler) {
-    return new RouteMatcher(j_routeMatcher.noMatch(function(jVal) {
+    j_routeMatcher.noMatch(function(jVal) {
       handler(new HttpServerRequest(jVal));
-    }));
+    });
+    return that;
   };
 
   // Get a reference to the underlying Java delegate

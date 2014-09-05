@@ -36,8 +36,8 @@ public class RouteMatcher {
     return ret;
   }
   public RouteMatcher accept(HttpServerRequest request) {
-    def ret= new RouteMatcher(this.delegate.accept(request.getDelegate()));
-    return ret;
+    this.delegate.accept(request.getDelegate());
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP GET
@@ -45,12 +45,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher get(String pattern, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.get(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.get(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP PUT
@@ -58,12 +58,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher put(String pattern, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.put(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.put(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP POST
@@ -71,12 +71,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher post(String pattern, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.post(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.post(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP DELETE
@@ -84,12 +84,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher delete(String pattern, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.delete(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.delete(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP OPTIONS
@@ -97,12 +97,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher options(String pattern, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.options(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.options(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP HEAD
@@ -110,12 +110,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher head(String pattern, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.head(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.head(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP TRACE
@@ -123,12 +123,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher trace(String pattern, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.trace(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.trace(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP CONNECT
@@ -136,12 +136,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher connect(String pattern, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.connect(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.connect(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP PATCH
@@ -149,12 +149,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher patch(String pattern, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.patch(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.patch(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for all HTTP methods
@@ -162,12 +162,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher all(String pattern, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.all(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.all(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP GET
@@ -175,12 +175,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher getWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.getWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.getWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP PUT
@@ -188,12 +188,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher putWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.putWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.putWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP POST
@@ -201,12 +201,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher postWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.postWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.postWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP DELETE
@@ -214,12 +214,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher deleteWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.deleteWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.deleteWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP OPTIONS
@@ -227,12 +227,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher optionsWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.optionsWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.optionsWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP HEAD
@@ -240,12 +240,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher headWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.headWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.headWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP TRACE
@@ -253,12 +253,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher traceWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.traceWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.traceWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP CONNECT
@@ -266,12 +266,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher connectWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.connectWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.connectWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for a matching HTTP PATCH
@@ -279,12 +279,12 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher patchWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.patchWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.patchWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called for all HTTP methods
@@ -292,23 +292,23 @@ public class RouteMatcher {
    * @param handler The handler to call
    */
   public RouteMatcher allWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.allWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.allWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
   /**
    * Specify a handler that will be called when no other handlers match.
    * If this handler is not specified default behaviour is to return a 404
    */
   public RouteMatcher noMatch(Handler<HttpServerRequest> handler) {
-    def ret= new RouteMatcher(this.delegate.noMatch(new Handler<io.vertx.core.http.HttpServerRequest>() {
+    this.delegate.noMatch(new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
         handler.handle(new HttpServerRequest(event));
       }
-    }));
-    return ret;
+    });
+    return this;
   }
 }
