@@ -31,208 +31,271 @@ var RouteMatcher = function(j_val) {
   var that = this;
 
   this.accept = function(request) {
-    j_routeMatcher.accept(request._jdel());
-    return that;
+    var __args = arguments;
+    if (__args.length === 1 && typeof __args[0] === 'object' && __args[0]._vertxgen) {
+      j_routeMatcher.accept(request._jdel());
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP GET
   */
   this.get = function(pattern, handler) {
-    j_routeMatcher.get(pattern, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.get(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP PUT
   */
   this.put = function(pattern, handler) {
-    j_routeMatcher.put(pattern, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.put(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP POST
   */
   this.post = function(pattern, handler) {
-    j_routeMatcher.post(pattern, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.post(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP DELETE
   */
   this.delete = function(pattern, handler) {
-    j_routeMatcher.delete(pattern, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.delete(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP OPTIONS
   */
   this.options = function(pattern, handler) {
-    j_routeMatcher.options(pattern, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.options(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP HEAD
   */
   this.head = function(pattern, handler) {
-    j_routeMatcher.head(pattern, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.head(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP TRACE
   */
   this.trace = function(pattern, handler) {
-    j_routeMatcher.trace(pattern, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.trace(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP CONNECT
   */
   this.connect = function(pattern, handler) {
-    j_routeMatcher.connect(pattern, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.connect(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP PATCH
   */
   this.patch = function(pattern, handler) {
-    j_routeMatcher.patch(pattern, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.patch(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for all HTTP methods
   */
   this.all = function(pattern, handler) {
-    j_routeMatcher.all(pattern, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.all(pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP GET
   */
   this.getWithRegEx = function(regex, handler) {
-    j_routeMatcher.getWithRegEx(regex, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.getWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP PUT
   */
   this.putWithRegEx = function(regex, handler) {
-    j_routeMatcher.putWithRegEx(regex, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.putWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP POST
   */
   this.postWithRegEx = function(regex, handler) {
-    j_routeMatcher.postWithRegEx(regex, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.postWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP DELETE
   */
   this.deleteWithRegEx = function(regex, handler) {
-    j_routeMatcher.deleteWithRegEx(regex, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.deleteWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP OPTIONS
   */
   this.optionsWithRegEx = function(regex, handler) {
-    j_routeMatcher.optionsWithRegEx(regex, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.optionsWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP HEAD
   */
   this.headWithRegEx = function(regex, handler) {
-    j_routeMatcher.headWithRegEx(regex, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.headWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP TRACE
   */
   this.traceWithRegEx = function(regex, handler) {
-    j_routeMatcher.traceWithRegEx(regex, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.traceWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP CONNECT
   */
   this.connectWithRegEx = function(regex, handler) {
-    j_routeMatcher.connectWithRegEx(regex, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.connectWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for a matching HTTP PATCH
   */
   this.patchWithRegEx = function(regex, handler) {
-    j_routeMatcher.patchWithRegEx(regex, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.patchWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
    Specify a handler that will be called for all HTTP methods
   */
   this.allWithRegEx = function(regex, handler) {
-    j_routeMatcher.allWithRegEx(regex, function(jVal) {
+    var __args = arguments;
+    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
+      j_routeMatcher.allWithRegEx(regex, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
 
   /*
@@ -241,11 +304,16 @@ var RouteMatcher = function(j_val) {
   
   */
   this.noMatch = function(handler) {
-    j_routeMatcher.noMatch(function(jVal) {
+    var __args = arguments;
+    if (__args.length === 1 && typeof __args[0] === 'function') {
+      j_routeMatcher.noMatch(function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
-    return that;
+      return that;
+    } else utils.invalidArgs();
   };
+
+  this._vertxgen = true;
 
   // Get a reference to the underlying Java delegate
   this._jdel = function() {
@@ -255,7 +323,10 @@ var RouteMatcher = function(j_val) {
 };
 
 RouteMatcher.newRouteMatcher = function() {
-  return new RouteMatcher(JRouteMatcher.newRouteMatcher());
+  var __args = arguments;
+  if (__args.length === 0) {
+    return new RouteMatcher(JRouteMatcher.newRouteMatcher());
+  } else utils.invalidArgs();
 };
 
 // We export the Constructor function
