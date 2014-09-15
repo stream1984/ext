@@ -21,5 +21,5 @@ package io.vertx.ext.routematcher;
  */
 public interface RouteMatcherFactory {
 
-  RouteMatcher newRouteMatcher();
+  RouteMatcher routeMatcher();
 }

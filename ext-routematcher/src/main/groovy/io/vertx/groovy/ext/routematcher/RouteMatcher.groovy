@@ -31,8 +31,8 @@ public class RouteMatcher {
   public io.vertx.ext.routematcher.RouteMatcher getDelegate() {
     return delegate;
   }
-  public static RouteMatcher newRouteMatcher() {
-    def ret= new RouteMatcher(io.vertx.ext.routematcher.RouteMatcher.newRouteMatcher());
+  public static RouteMatcher routeMatcher() {
+    def ret= new RouteMatcher(io.vertx.ext.routematcher.RouteMatcher.routeMatcher());
     return ret;
   }
   public RouteMatcher accept(HttpServerRequest request) {

@@ -25,7 +25,7 @@ import io.vertx.ext.routematcher.RouteMatcherFactory;
 public class RouteMatcherFactoryImpl implements RouteMatcherFactory {
 
   @Override
-  public RouteMatcher newRouteMatcher() {
+  public RouteMatcher routeMatcher() {
     return new RouteMatcherImpl();
   }
 }

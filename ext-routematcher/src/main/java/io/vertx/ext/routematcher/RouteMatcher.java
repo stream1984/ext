@@ -28,8 +28,8 @@ import io.vertx.core.http.HttpServerRequest;
 @VertxGen
 public interface RouteMatcher {
 
-  static RouteMatcher newRouteMatcher() {
-    return factory.newRouteMatcher();
+  static RouteMatcher routeMatcher() {
+    return factory.routeMatcher();
   }
 
   @Fluent

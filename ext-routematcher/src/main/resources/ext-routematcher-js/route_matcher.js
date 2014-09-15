@@ -322,10 +322,10 @@ var RouteMatcher = function(j_val) {
 
 };
 
-RouteMatcher.newRouteMatcher = function() {
+RouteMatcher.routeMatcher = function() {
   var __args = arguments;
   if (__args.length === 0) {
-    return new RouteMatcher(JRouteMatcher.newRouteMatcher());
+    return new RouteMatcher(JRouteMatcher.routeMatcher());
   } else utils.invalidArgs();
 };
 

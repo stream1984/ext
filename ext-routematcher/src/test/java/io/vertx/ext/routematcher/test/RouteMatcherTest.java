@@ -243,7 +243,7 @@ public class RouteMatcherTest extends HttpTestBase {
     server = vertx.createHttpServer(HttpServerOptions.options().setPort(DEFAULT_HTTP_PORT));
     client = vertx.createHttpClient(HttpClientOptions.options());
 
-    RouteMatcher matcher = RouteMatcher.newRouteMatcher();
+    RouteMatcher matcher = RouteMatcher.routeMatcher();
 
     Handler<HttpServerRequest> handler = req -> {
       assertEquals(params.size(), req.params().size());
