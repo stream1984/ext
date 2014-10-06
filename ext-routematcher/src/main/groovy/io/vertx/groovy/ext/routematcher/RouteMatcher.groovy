@@ -28,15 +28,15 @@ public class RouteMatcher {
   public RouteMatcher(io.vertx.ext.routematcher.RouteMatcher delegate) {
     this.delegate = delegate;
   }
-  public io.vertx.ext.routematcher.RouteMatcher getDelegate() {
+  public Object getDelegate() {
     return delegate;
   }
   public static RouteMatcher routeMatcher() {
-    def ret= new RouteMatcher(io.vertx.ext.routematcher.RouteMatcher.routeMatcher());
+    def ret= RouteMatcher.FACTORY.apply(io.vertx.ext.routematcher.RouteMatcher.routeMatcher());
     return ret;
   }
   public RouteMatcher accept(HttpServerRequest request) {
-    this.delegate.accept(request.getDelegate());
+    this.delegate.accept((io.vertx.core.http.HttpServerRequest)request.getDelegate());
     return this;
   }
   /**
@@ -47,7 +47,7 @@ public class RouteMatcher {
   public RouteMatcher get(String pattern, Handler<HttpServerRequest> handler) {
     this.delegate.get(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -60,7 +60,7 @@ public class RouteMatcher {
   public RouteMatcher put(String pattern, Handler<HttpServerRequest> handler) {
     this.delegate.put(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -73,7 +73,7 @@ public class RouteMatcher {
   public RouteMatcher post(String pattern, Handler<HttpServerRequest> handler) {
     this.delegate.post(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -86,7 +86,7 @@ public class RouteMatcher {
   public RouteMatcher delete(String pattern, Handler<HttpServerRequest> handler) {
     this.delegate.delete(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -99,7 +99,7 @@ public class RouteMatcher {
   public RouteMatcher options(String pattern, Handler<HttpServerRequest> handler) {
     this.delegate.options(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -112,7 +112,7 @@ public class RouteMatcher {
   public RouteMatcher head(String pattern, Handler<HttpServerRequest> handler) {
     this.delegate.head(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -125,7 +125,7 @@ public class RouteMatcher {
   public RouteMatcher trace(String pattern, Handler<HttpServerRequest> handler) {
     this.delegate.trace(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -138,7 +138,7 @@ public class RouteMatcher {
   public RouteMatcher connect(String pattern, Handler<HttpServerRequest> handler) {
     this.delegate.connect(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -151,7 +151,7 @@ public class RouteMatcher {
   public RouteMatcher patch(String pattern, Handler<HttpServerRequest> handler) {
     this.delegate.patch(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -164,7 +164,7 @@ public class RouteMatcher {
   public RouteMatcher all(String pattern, Handler<HttpServerRequest> handler) {
     this.delegate.all(pattern, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -177,7 +177,7 @@ public class RouteMatcher {
   public RouteMatcher getWithRegEx(String regex, Handler<HttpServerRequest> handler) {
     this.delegate.getWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -190,7 +190,7 @@ public class RouteMatcher {
   public RouteMatcher putWithRegEx(String regex, Handler<HttpServerRequest> handler) {
     this.delegate.putWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -203,7 +203,7 @@ public class RouteMatcher {
   public RouteMatcher postWithRegEx(String regex, Handler<HttpServerRequest> handler) {
     this.delegate.postWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -216,7 +216,7 @@ public class RouteMatcher {
   public RouteMatcher deleteWithRegEx(String regex, Handler<HttpServerRequest> handler) {
     this.delegate.deleteWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -229,7 +229,7 @@ public class RouteMatcher {
   public RouteMatcher optionsWithRegEx(String regex, Handler<HttpServerRequest> handler) {
     this.delegate.optionsWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -242,7 +242,7 @@ public class RouteMatcher {
   public RouteMatcher headWithRegEx(String regex, Handler<HttpServerRequest> handler) {
     this.delegate.headWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -255,7 +255,7 @@ public class RouteMatcher {
   public RouteMatcher traceWithRegEx(String regex, Handler<HttpServerRequest> handler) {
     this.delegate.traceWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -268,7 +268,7 @@ public class RouteMatcher {
   public RouteMatcher connectWithRegEx(String regex, Handler<HttpServerRequest> handler) {
     this.delegate.connectWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -281,7 +281,7 @@ public class RouteMatcher {
   public RouteMatcher patchWithRegEx(String regex, Handler<HttpServerRequest> handler) {
     this.delegate.patchWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -294,7 +294,7 @@ public class RouteMatcher {
   public RouteMatcher allWithRegEx(String regex, Handler<HttpServerRequest> handler) {
     this.delegate.allWithRegEx(regex, new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
@@ -306,9 +306,13 @@ public class RouteMatcher {
   public RouteMatcher noMatch(Handler<HttpServerRequest> handler) {
     this.delegate.noMatch(new Handler<io.vertx.core.http.HttpServerRequest>() {
       public void handle(io.vertx.core.http.HttpServerRequest event) {
-        handler.handle(new HttpServerRequest(event));
+        handler.handle(HttpServerRequest.FACTORY.apply(event));
       }
     });
     return this;
   }
+
+  static final java.util.function.Function<io.vertx.ext.routematcher.RouteMatcher, RouteMatcher> FACTORY = io.vertx.lang.groovy.Factories.createFactory() {
+    io.vertx.ext.routematcher.RouteMatcher arg -> new RouteMatcher(arg);
+  };
 }
