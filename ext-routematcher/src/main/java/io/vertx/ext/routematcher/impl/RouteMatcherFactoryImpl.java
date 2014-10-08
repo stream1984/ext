@@ -17,7 +17,7 @@
 package io.vertx.ext.routematcher.impl;
 
 import io.vertx.ext.routematcher.RouteMatcher;
-import io.vertx.ext.routematcher.RouteMatcherFactory;
+import io.vertx.ext.routematcher.spi.RouteMatcherFactory;
 
 /**
  * @author <a href="http://tfox.org">Tim Fox</a>

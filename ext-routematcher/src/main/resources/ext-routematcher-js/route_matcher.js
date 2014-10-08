@@ -39,116 +39,12 @@ var RouteMatcher = function(j_val) {
   };
 
   /*
-   Specify a handler that will be called for a matching HTTP GET
+   Specify a handler that will be called for a matching request
   */
-  this.get = function(pattern, handler) {
+  this.matchMethod = function(method, pattern, handler) {
     var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.get(pattern, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP PUT
-  */
-  this.put = function(pattern, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.put(pattern, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP POST
-  */
-  this.post = function(pattern, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.post(pattern, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP DELETE
-  */
-  this.delete = function(pattern, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.delete(pattern, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP OPTIONS
-  */
-  this.options = function(pattern, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.options(pattern, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP HEAD
-  */
-  this.head = function(pattern, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.head(pattern, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP TRACE
-  */
-  this.trace = function(pattern, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.trace(pattern, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP CONNECT
-  */
-  this.connect = function(pattern, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.connect(pattern, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP PATCH
-  */
-  this.patch = function(pattern, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.patch(pattern, function(jVal) {
+    if (__args.length === 3 && typeof __args[0] === 'string' && typeof __args[1] === 'string' && typeof __args[2] === 'function') {
+      j_routeMatcher.matchMethod(io.vertx.core.http.HttpMethod.valueOf(__args[0]), pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
       return that;
@@ -169,116 +65,12 @@ var RouteMatcher = function(j_val) {
   };
 
   /*
-   Specify a handler that will be called for a matching HTTP GET
+   Specify a handler that will be called for a matching request
   */
-  this.getWithRegEx = function(regex, handler) {
+  this.matchMethodWithRegEx = function(method, pattern, handler) {
     var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.getWithRegEx(regex, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP PUT
-  */
-  this.putWithRegEx = function(regex, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.putWithRegEx(regex, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP POST
-  */
-  this.postWithRegEx = function(regex, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.postWithRegEx(regex, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP DELETE
-  */
-  this.deleteWithRegEx = function(regex, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.deleteWithRegEx(regex, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP OPTIONS
-  */
-  this.optionsWithRegEx = function(regex, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.optionsWithRegEx(regex, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP HEAD
-  */
-  this.headWithRegEx = function(regex, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.headWithRegEx(regex, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP TRACE
-  */
-  this.traceWithRegEx = function(regex, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.traceWithRegEx(regex, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP CONNECT
-  */
-  this.connectWithRegEx = function(regex, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.connectWithRegEx(regex, function(jVal) {
-      handler(new HttpServerRequest(jVal));
-    });
-      return that;
-    } else utils.invalidArgs();
-  };
-
-  /*
-   Specify a handler that will be called for a matching HTTP PATCH
-  */
-  this.patchWithRegEx = function(regex, handler) {
-    var __args = arguments;
-    if (__args.length === 2 && typeof __args[0] === 'string' && typeof __args[1] === 'function') {
-      j_routeMatcher.patchWithRegEx(regex, function(jVal) {
+    if (__args.length === 3 && typeof __args[0] === 'string' && typeof __args[1] === 'string' && typeof __args[2] === 'function') {
+      j_routeMatcher.matchMethodWithRegEx(io.vertx.core.http.HttpMethod.valueOf(__args[0]), pattern, function(jVal) {
       handler(new HttpServerRequest(jVal));
     });
       return that;

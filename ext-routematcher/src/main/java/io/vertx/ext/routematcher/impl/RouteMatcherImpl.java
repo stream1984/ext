@@ -17,6 +17,7 @@
 package io.vertx.ext.routematcher.impl;
 
 import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.routematcher.RouteMatcher;
 
@@ -48,155 +49,36 @@ import java.util.regex.Pattern;
  */
 public class RouteMatcherImpl implements RouteMatcher {
 
-  private final List<PatternBinding> getBindings = new ArrayList<>();
-  private final List<PatternBinding> putBindings = new ArrayList<>();
-  private final List<PatternBinding> postBindings = new ArrayList<>();
-  private final List<PatternBinding> deleteBindings = new ArrayList<>();
-  private final List<PatternBinding> optionsBindings = new ArrayList<>();
-  private final List<PatternBinding> headBindings = new ArrayList<>();
-  private final List<PatternBinding> traceBindings = new ArrayList<>();
-  private final List<PatternBinding> connectBindings = new ArrayList<>();
-  private final List<PatternBinding> patchBindings = new ArrayList<>();
+  private final Map<HttpMethod, List<PatternBinding>> bindingsMap = new HashMap<>();
+  
   private Handler<HttpServerRequest> noMatchHandler;
 
   /**
    * Do not instantiate this directly - use RouteMatcher.newRouteMatcher() instead
    */
-  public RouteMatcherImpl() {
+  RouteMatcherImpl() {
   }
 
   @Override
   public RouteMatcher accept(HttpServerRequest request) {
-    switch (request.method()) {
-      case "GET":
-        route(request, getBindings);
-        break;
-      case "PUT":
-        route(request, putBindings);
-        break;
-      case "POST":
-        route(request, postBindings);
-        break;
-      case "DELETE":
-        route(request, deleteBindings);
-        break;
-      case "OPTIONS":
-        route(request, optionsBindings);
-        break;
-      case "HEAD":
-        route(request, headBindings);
-        break;
-      case "TRACE":
-        route(request, traceBindings);
-        break;
-      case "PATCH":
-        route(request, patchBindings);
-        break;
-      case "CONNECT":
-        route(request, connectBindings);
-        break;
-      default:
-        notFound(request);
+    List<PatternBinding> bindings = bindingsMap.get(HttpMethod.valueOf(request.method()));
+    if (bindings != null) {
+      route(request, bindings);
+    } else {
+      notFound(request);
     }
     return this;
   }
 
-  /**
-   * Specify a handler that will be called for a matching HTTP GET
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
   @Override
-  public RouteMatcherImpl get(String pattern, Handler<HttpServerRequest> handler) {
-    addPattern(pattern, handler, getBindings);
+  public RouteMatcher matchMethod(HttpMethod method, String pattern, Handler<HttpServerRequest> handler) {
+    addPattern(method, pattern, handler);
     return this;
   }
 
-  /**
-   * Specify a handler that will be called for a matching HTTP PUT
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
   @Override
-  public RouteMatcherImpl put(String pattern, Handler<HttpServerRequest> handler) {
-    addPattern(pattern, handler, putBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP POST
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl post(String pattern, Handler<HttpServerRequest> handler) {
-    addPattern(pattern, handler, postBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP DELETE
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl delete(String pattern, Handler<HttpServerRequest> handler) {
-    addPattern(pattern, handler, deleteBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP OPTIONS
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl options(String pattern, Handler<HttpServerRequest> handler) {
-    addPattern(pattern, handler, optionsBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP HEAD
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl head(String pattern, Handler<HttpServerRequest> handler) {
-    addPattern(pattern, handler, headBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP TRACE
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl trace(String pattern, Handler<HttpServerRequest> handler) {
-    addPattern(pattern, handler, traceBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP CONNECT
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl connect(String pattern, Handler<HttpServerRequest> handler) {
-    addPattern(pattern, handler, connectBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP PATCH
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl patch(String pattern, Handler<HttpServerRequest> handler) {
-    addPattern(pattern, handler, patchBindings);
+  public RouteMatcher matchMethodWithRegEx(HttpMethod method, String regex, Handler<HttpServerRequest> handler) {
+    addRegEx(method, regex, handler);
     return this;
   }
 
@@ -207,114 +89,15 @@ public class RouteMatcherImpl implements RouteMatcher {
    */
   @Override
   public RouteMatcherImpl all(String pattern, Handler<HttpServerRequest> handler) {
-    addPattern(pattern, handler, getBindings);
-    addPattern(pattern, handler, putBindings);
-    addPattern(pattern, handler, postBindings);
-    addPattern(pattern, handler, deleteBindings);
-    addPattern(pattern, handler, optionsBindings);
-    addPattern(pattern, handler, headBindings);
-    addPattern(pattern, handler, traceBindings);
-    addPattern(pattern, handler, connectBindings);
-    addPattern(pattern, handler, patchBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP GET
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl getWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    addRegEx(regex, handler, getBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP PUT
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl putWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    addRegEx(regex, handler, putBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP POST
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl postWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    addRegEx(regex, handler, postBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP DELETE
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl deleteWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    addRegEx(regex, handler, deleteBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP OPTIONS
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl optionsWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    addRegEx(regex, handler, optionsBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP HEAD
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl headWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    addRegEx(regex, handler, headBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP TRACE
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl traceWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    addRegEx(regex, handler, traceBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP CONNECT
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl connectWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    addRegEx(regex, handler, connectBindings);
-    return this;
-  }
-
-  /**
-   * Specify a handler that will be called for a matching HTTP PATCH
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Override
-  public RouteMatcherImpl patchWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    addRegEx(regex, handler, patchBindings);
+    addPattern(HttpMethod.GET, pattern, handler);
+    addPattern(HttpMethod.PUT, pattern, handler);
+    addPattern(HttpMethod.POST, pattern, handler);
+    addPattern(HttpMethod.DELETE, pattern, handler);
+    addPattern(HttpMethod.OPTIONS, pattern, handler);
+    addPattern(HttpMethod.HEAD, pattern, handler);
+    addPattern(HttpMethod.TRACE, pattern, handler);
+    addPattern(HttpMethod.CONNECT, pattern, handler);
+    addPattern(HttpMethod.PATCH, pattern, handler);    
     return this;
   }
 
@@ -325,15 +108,15 @@ public class RouteMatcherImpl implements RouteMatcher {
    */
   @Override
   public RouteMatcherImpl allWithRegEx(String regex, Handler<HttpServerRequest> handler) {
-    addRegEx(regex, handler, getBindings);
-    addRegEx(regex, handler, putBindings);
-    addRegEx(regex, handler, postBindings);
-    addRegEx(regex, handler, deleteBindings);
-    addRegEx(regex, handler, optionsBindings);
-    addRegEx(regex, handler, headBindings);
-    addRegEx(regex, handler, traceBindings);
-    addRegEx(regex, handler, connectBindings);
-    addRegEx(regex, handler, patchBindings);
+    addRegEx(HttpMethod.GET, regex, handler);
+    addRegEx(HttpMethod.PUT, regex, handler);
+    addRegEx(HttpMethod.POST, regex, handler);
+    addRegEx(HttpMethod.DELETE, regex, handler);
+    addRegEx(HttpMethod.OPTIONS, regex, handler);
+    addRegEx(HttpMethod.HEAD, regex, handler);
+    addRegEx(HttpMethod.TRACE, regex, handler);
+    addRegEx(HttpMethod.CONNECT, regex, handler);
+    addRegEx(HttpMethod.PATCH, regex, handler);
     return this;
   }
 
@@ -347,7 +130,8 @@ public class RouteMatcherImpl implements RouteMatcher {
     return this;
   }
 
-  private void addPattern(String input, Handler<HttpServerRequest> handler, List<PatternBinding> bindings) {
+  private void addPattern(HttpMethod method, String input, Handler<HttpServerRequest> handler) {
+    List<PatternBinding> bindings = getBindings(method);
     // We need to search for any :<token name> tokens in the String and replace them with named capture groups
     Matcher m =  Pattern.compile(":([A-Za-z][A-Za-z0-9_]*)").matcher(input);
     StringBuffer sb = new StringBuffer();
@@ -366,9 +150,19 @@ public class RouteMatcherImpl implements RouteMatcher {
     bindings.add(binding);
   }
 
-  private static void addRegEx(String input, Handler<HttpServerRequest> handler, List<PatternBinding> bindings) {
+  private void addRegEx(HttpMethod method, String input, Handler<HttpServerRequest> handler) {
+    List<PatternBinding> bindings = getBindings(method);
     PatternBinding binding = new PatternBinding(Pattern.compile(input), null, handler);
     bindings.add(binding);
+  }
+  
+  private List<PatternBinding> getBindings(HttpMethod method) {
+    List<PatternBinding> bindings = bindingsMap.get(method);
+    if (bindings == null) {
+      bindings = new ArrayList<>();
+      bindingsMap.put(method, bindings);
+    }
+    return bindings;
   }
 
   private void route(HttpServerRequest request, List<PatternBinding> bindings) {

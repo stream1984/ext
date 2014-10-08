@@ -20,7 +20,9 @@ import io.vertx.codegen.annotations.Fluent;
 import io.vertx.codegen.annotations.VertxGen;
 import io.vertx.core.Handler;
 import io.vertx.core.ServiceHelper;
+import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
+import io.vertx.ext.routematcher.spi.RouteMatcherFactory;
 
 /**
  * @author <a href="http://tfox.org">Tim Fox</a>
@@ -36,76 +38,13 @@ public interface RouteMatcher {
   RouteMatcher accept(HttpServerRequest request);
 
   /**
-   * Specify a handler that will be called for a matching HTTP GET
+   * Specify a handler that will be called for a matching request
+   * @param method - the HTTP method
    * @param pattern The simple pattern
    * @param handler The handler to call
    */
   @Fluent
-  RouteMatcher get(String pattern, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP PUT
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher put(String pattern, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP POST
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher post(String pattern, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP DELETE
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher delete(String pattern, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP OPTIONS
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher options(String pattern, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP HEAD
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher head(String pattern, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP TRACE
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher trace(String pattern, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP CONNECT
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher connect(String pattern, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP PATCH
-   * @param pattern The simple pattern
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher patch(String pattern, Handler<HttpServerRequest> handler);
+  RouteMatcher matchMethod(HttpMethod method, String pattern, Handler<HttpServerRequest> handler);
 
   /**
    * Specify a handler that will be called for all HTTP methods
@@ -116,76 +55,13 @@ public interface RouteMatcher {
   RouteMatcher all(String pattern, Handler<HttpServerRequest> handler);
 
   /**
-   * Specify a handler that will be called for a matching HTTP GET
-   * @param regex A regular expression
+   * Specify a handler that will be called for a matching request
+   * @param method - the HTTP method
+   * @param pattern The simple pattern
    * @param handler The handler to call
    */
   @Fluent
-  RouteMatcher getWithRegEx(String regex, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP PUT
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher putWithRegEx(String regex, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP POST
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher postWithRegEx(String regex, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP DELETE
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher deleteWithRegEx(String regex, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP OPTIONS
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher optionsWithRegEx(String regex, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP HEAD
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher headWithRegEx(String regex, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP TRACE
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher traceWithRegEx(String regex, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP CONNECT
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher connectWithRegEx(String regex, Handler<HttpServerRequest> handler);
-
-  /**
-   * Specify a handler that will be called for a matching HTTP PATCH
-   * @param regex A regular expression
-   * @param handler The handler to call
-   */
-  @Fluent
-  RouteMatcher patchWithRegEx(String regex, Handler<HttpServerRequest> handler);
+  RouteMatcher matchMethodWithRegEx(HttpMethod method, String pattern, Handler<HttpServerRequest> handler);
 
   /**
    * Specify a handler that will be called for all HTTP methods
