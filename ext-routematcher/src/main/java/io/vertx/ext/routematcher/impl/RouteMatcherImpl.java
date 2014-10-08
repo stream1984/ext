@@ -61,7 +61,7 @@ public class RouteMatcherImpl implements RouteMatcher {
 
   @Override
   public RouteMatcher accept(HttpServerRequest request) {
-    List<PatternBinding> bindings = bindingsMap.get(HttpMethod.valueOf(request.method()));
+    List<PatternBinding> bindings = bindingsMap.get(request.method());
     if (bindings != null) {
       route(request, bindings);
     } else {
