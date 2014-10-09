@@ -22,7 +22,6 @@ import io.vertx.core.http.HttpClientResponse;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.http.HttpServerRequest;
-import io.vertx.core.http.RequestOptions;
 import io.vertx.ext.routematcher.RouteMatcher;
 import io.vertx.test.core.HttpTestBase;
 import org.junit.Test;
@@ -282,8 +281,7 @@ public class RouteMatcherTest extends HttpTestBase {
         }
       };
 
-      RequestOptions options = new RequestOptions().setRequestURI(uri).setPort(DEFAULT_HTTP_PORT);
-      client.request(method, options, respHandler).end();
+      client.request(method, DEFAULT_HTTP_PORT, DEFAULT_HTTP_HOST, uri, respHandler).end();
     }));
 
     await();
