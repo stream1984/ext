@@ -1,0 +1,1 @@
+module.exports = Java.type("io.vertx.ext.rx.js.test.JsIntegrationTest").current;
