@@ -22,7 +22,10 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
@@ -64,6 +67,36 @@ public class IntegrationTest extends VertxTestBase {
     s.assertCompleted();
     s.assertEmpty();
     assertFalse(consumer.isRegistered());
+  }
+
+  @Test
+  public void testObservableUnsubscribeDuringObservation() {
+    EventBus eb = vertx.eventBus();
+    MessageConsumer<String> consumer = eb.<String>consumer("the-address");
+    Observable<String> obs = RxHelper.toObservable(consumer.bodyStream());
+    Observable<String> a = obs.take(4);
+    List<String> obtained = new ArrayList<>();
+    a.subscribe(new Subscriber<String>() {
+      @Override
+      public void onCompleted() {
+        assertEquals(Arrays.asList("msg0", "msg1", "msg2", "msg3"), obtained);
+        testComplete();
+      }
+
+      @Override
+      public void onError(Throwable e) {
+        fail(e.getMessage());
+      }
+
+      @Override
+      public void onNext(String str) {
+        obtained.add(str);
+      }
+    });
+    for (int i = 0;i < 7;i++) {
+      eb.send("the-address", "msg" + i);
+    }
+    await();
   }
 
   @Test
