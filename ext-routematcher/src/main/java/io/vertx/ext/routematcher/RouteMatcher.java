@@ -19,10 +19,9 @@ package io.vertx.ext.routematcher;
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.codegen.annotations.VertxGen;
 import io.vertx.core.Handler;
-import io.vertx.core.ServiceHelper;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
-import io.vertx.ext.routematcher.spi.RouteMatcherFactory;
+import io.vertx.ext.routematcher.impl.RouteMatcherImpl;
 
 /**
  * @author <a href="http://tfox.org">Tim Fox</a>
@@ -31,7 +30,7 @@ import io.vertx.ext.routematcher.spi.RouteMatcherFactory;
 public interface RouteMatcher {
 
   static RouteMatcher routeMatcher() {
-    return factory.routeMatcher();
+    return new RouteMatcherImpl();
   }
 
   @Fluent
@@ -78,5 +77,4 @@ public interface RouteMatcher {
   @Fluent
   RouteMatcher noMatch(Handler<HttpServerRequest> handler);
 
-  static final RouteMatcherFactory factory = ServiceHelper.loadFactory(RouteMatcherFactory.class);
 }
