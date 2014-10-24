@@ -27,34 +27,7 @@ public class RxHelper {
    * @return the adapted observable
    */
   public static <T> Observable<T> toObservable(ReadStream<T> stream) {
-    class Foo extends SingleOnSubscribeAdapter<T> implements Handler<T> {
-      /** Handle response */
-      public void handle(T msg) {
-        // Assume stream
-        fireNext(msg);
-      }
-
-      @Override
-      public void execute() {
-        stream.handler(this);
-        stream.exceptionHandler(this::fireError);
-        stream.endHandler(v -> fireComplete());
-      }
-
-      @Override
-      public void onUnsubscribed() {
-        try {
-          stream.handler(null);
-          stream.exceptionHandler(null);
-          stream.endHandler(null);
-        }
-        catch(Exception e) {
-          // Clearing handlers after stream closed causes issues for some (eg AsyncFile) so silently drop errors
-        }
-      }
-    }
-    SingleOnSubscribeAdapter<T> rh = new Foo();
-    return Observable.create(rh);
+    return Observable.create(new HandlerAdapter<>(stream));
   }
 
   /**
