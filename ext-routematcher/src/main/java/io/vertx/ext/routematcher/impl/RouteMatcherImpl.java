@@ -56,7 +56,7 @@ public class RouteMatcherImpl implements RouteMatcher {
   /**
    * Do not instantiate this directly - use RouteMatcher.newRouteMatcher() instead
    */
-  RouteMatcherImpl() {
+  public RouteMatcherImpl() {
   }
 
   @Override
