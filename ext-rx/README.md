@@ -13,11 +13,21 @@ Vert.x provides readstream objects, the Rx extension for Vert.x provides ways fo
 
 ### RxJava
 
-Vert.x provides `io.vertx.core.streams.ReadStream` objects, the `RxHelper` class provides a static util method for convering such stream to a `rx.Observable`.
+Vert.x for Java provides `io.vertx.core.streams.ReadStream` objects, the `RxHelper` class provides a static util method for convering such stream to a `rx.Observable`.
 
 ```
 ReadStream<T> stream = ...;
 Observable<T> observable = RxHelper.toObservable(stream);
+```
+
+### RxGroovy
+
+Vert.x API for Groovy provides `io.vertx.groovy.core.stream.ReadStream` objects, the RxGroovy provides a
+Groovy extension module that adds the `toObservable` method to the read stream class.
+
+```
+ReadStream<T> stream = ...;
+Observable<T> observable = stream.toObservable();
 ```
 
 ### RxJS
@@ -71,6 +81,19 @@ Handler<AsyncResult<Server>> o = RxHelper.toHandler(
   cause -> {},  // onError
   () -> {}      // onCompleted
 );
+```
+
+### RxGroovy
+
+The RxJava `io.vertx.ext.rx.java.RxHelper` should be used to:
+- create an `io.vertx.ext.rx.java.ObservableHandler`,
+- transform actions to an async result handler
+
+The RxGroovy extension module adds the `toHandler` method on the `rx.Observer` class:
+
+```
+Observer<Server> observer = ...;
+Handler<AsyncResult<Server>> o = observer.toHandler();
 ```
 
 ### RxJS

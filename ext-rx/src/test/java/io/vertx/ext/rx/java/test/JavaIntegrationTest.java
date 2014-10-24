@@ -37,19 +37,31 @@ public class JavaIntegrationTest extends VertxTestBase {
     EventBus eb = vertx.eventBus();
     MessageConsumer<String> consumer = eb.<String>consumer("the-address");
     Observable<String> obs = RxHelper.toObservable(consumer.bodyStream());
-    MySubscriber<String> s = new MySubscriber<>();
-    obs.subscribe(s);
+    List<String> items = new ArrayList<>();
+    obs.subscribe(new Subscriber<String>() {
+      @Override
+      public void onNext(String s) {
+        items.add(s);
+        if (items.size() == 3) {
+          unsubscribe();
+        }
+      }
+      @Override
+      public void onError(Throwable throwable) {
+        System.out.println("throwable = " + throwable);
+        fail(throwable.getMessage());
+      }
+      @Override
+      public void onCompleted() {
+        assertEquals(Arrays.asList("msg1", "msg2", "msg3"), items);
+        assertFalse(consumer.isRegistered());
+        testComplete();
+      }
+    });
     eb.send("the-address", "msg1");
     eb.send("the-address", "msg2");
     eb.send("the-address", "msg3");
-    s.assertItem("msg1");
-    s.assertItem("msg2");
-    s.assertItem("msg3");
-    s.assertEmpty();
-    s.unsubscribe();
-    s.assertCompleted();
-    s.assertEmpty();
-    assertFalse(consumer.isRegistered());
+    await();
   }
 
   @Test
@@ -57,16 +69,38 @@ public class JavaIntegrationTest extends VertxTestBase {
     EventBus eb = vertx.eventBus();
     MessageConsumer<String> consumer = eb.<String>consumer("the-address");
     Observable<String> obs = RxHelper.toObservable(consumer.bodyStream());
-    obs.subscribe(new MySubscriber<>()).unsubscribe();
-    MySubscriber<String> s = new MySubscriber<>();
-    obs.subscribe(s);
-    eb.send("the-address", "msg1");
-    s.assertItem("msg1");
-    s.assertEmpty();
-    s.unsubscribe();
-    s.assertCompleted();
-    s.assertEmpty();
-    assertFalse(consumer.isRegistered());
+    obs.subscribe(new Subscriber<String>() {
+      @Override
+      public void onNext(String s) {
+        fail("Was not expecting item " + s);
+      }
+      @Override
+      public void onError(Throwable throwable) {
+        fail("Was not esxpecting error " + throwable.getMessage());
+      }
+      @Override
+      public void onCompleted() {
+        unsubscribe();
+        obs.subscribe(new Subscriber<String>() {
+          @Override
+          public void onNext(String s) {
+            assertEquals("msg1", s);
+            unsubscribe();
+          }
+          @Override
+          public void onError(Throwable throwable) {
+            fail("Was not esxpecting error " + throwable.getMessage());
+          }
+          @Override
+          public void onCompleted() {
+            assertFalse(consumer.isRegistered());
+            testComplete();
+          }
+        });
+        eb.send("the-address", "msg1");
+      }
+    }).unsubscribe();
+    await();
   }
 
   @Test
@@ -80,9 +114,8 @@ public class JavaIntegrationTest extends VertxTestBase {
       @Override
       public void onCompleted() {
         assertEquals(Arrays.asList("msg0", "msg1", "msg2", "msg3"), obtained);
-        testComplete();
+        consumer.endHandler(v -> testComplete());
       }
-
       @Override
       public void onError(Throwable e) {
         fail(e.getMessage());

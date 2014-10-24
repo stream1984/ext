@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
  */
-class SingleOnSubscribeAdapter<T> implements Observable.OnSubscribe<T> {
+public class SingleOnSubscribeAdapter<T> implements Observable.OnSubscribe<T> {
 
   protected final AtomicReference<SingleSubscription> subRef = new AtomicReference<>();
 
@@ -109,8 +109,8 @@ class SingleOnSubscribeAdapter<T> implements Observable.OnSubscribe<T> {
         return;
       }
       if (subRef.compareAndSet(this, null)) {
-        subscriber.onCompleted();
         onUnsubscribed();
+        subscriber.onCompleted();
       }
     }
 

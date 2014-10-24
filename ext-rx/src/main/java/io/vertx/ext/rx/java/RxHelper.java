@@ -44,12 +44,12 @@ public class RxHelper {
   /**
    * Adapt a {@link Subscriber} as a {@code Handler<AsyncResult<T>>;}.
    *
-   * @param subscriber the subscriber to adapt
+   * @param observer the subscriber to adapt
    * @return a {@code Handler<AsyncResult<T>>}
    */
-  public static <T> Handler<AsyncResult<T>> toHandler(Observer<T> subscriber) {
+  public static <T> Handler<AsyncResult<T>> toHandler(Observer<T> observer) {
     ObservableHandler<T> observable = RxHelper.<T>observableHandler();
-    observable.subscribe(subscriber);
+    observable.subscribe(observer);
     return observable.asHandler();
   }
 
