@@ -1,9 +1,14 @@
 
-// Needed by rx.js to work, need go figure out how it is needed and implement it there or in vertx-js
-if (typeof setTimeout === 'undefined') {
-  setTimeout = function() { throw 'not yet implemented' };
+// Needed by rx.js to work, need to figure out if it should be there or in vertx-js
+setTimeout = function(callback,delay) {
+  return vertx.setTimer(delay, callback);
+};
+clearTimeout = function(id) {
+  vertx.cancelTimer(id);
 }
-var Rx = require("rx");
+
+
+var Rx = require("rx.all");
 var utils = require('vertx-js/util/utils');
 
 Rx.toObservable = function() {
