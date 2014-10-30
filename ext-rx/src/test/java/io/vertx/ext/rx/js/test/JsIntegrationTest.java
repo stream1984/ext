@@ -76,6 +76,11 @@ public class JsIntegrationTest extends VertxTestBase {
     deployTest("test_observer_to_handler.js");
   }
 
+  @Test
+  public void testTimeMap() throws Throwable {
+    deployTest("test_time_map.js");
+  }
+
   private void deployTest(String test) {
     vertx.deployVerticle(test, ar -> {
       if (!ar.succeeded()) {
