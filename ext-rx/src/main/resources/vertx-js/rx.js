@@ -1,13 +1,3 @@
-
-// Needed by rx.js to work, need to figure out if it should be there or in vertx-js
-setTimeout = function(callback,delay) {
-  return vertx.setTimer(delay, callback);
-};
-clearTimeout = function(id) {
-  vertx.cancelTimer(id);
-}
-
-
 var Rx = require("rx.all");
 var utils = require('vertx-js/util/utils');
 
