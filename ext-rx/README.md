@@ -32,12 +32,12 @@ Observable<T> observable = stream.toObservable();
 
 ### RxJS
 
-The Rx module provides a `toObservable` function for converting a Vert.x read stream to an observable:
+Vert.x provides an `rx.vertx` module for RxJS. An read stream can be adapted to an observable with the `Rx.Observable.fromReadStream` function:
 
 ```
 var stream = ...;
-var Rx = require("vertx-js/rx");
-var observable = Rx.toObservable(stream);
+var Rx = require("rx.vertx");
+var observable = Rx.Observable.fromReadStream(stream);
 ```
 
 ## Dealing with a future
@@ -98,11 +98,11 @@ Handler<AsyncResult<Server>> o = observer.toHandler();
 
 ### RxJS
 
-The `vertx-rx` module provides an augmented Rx module with the `observableHandler` function:
+The `rx.vertx` module provides an `observableHandler` function:
 
 ```
 var server = vertx.createHttpServer({ "port":1234, "host":"localhost" });
-var Rx = require("vertx-js/rx");
+var Rx = require("rx.vertx");
 var observable = Rx.observableHandler();
 observable.subscribe(
   function(server) {
@@ -123,7 +123,7 @@ var observer = Rx.Observer.create(
   function(err) { ... },  // onError
   function() { ... }      // onCompleted
 );
-var handler = Rx.toHandler(observer);
+var handler = observer.toHandler();
 ```
 
 # Examples

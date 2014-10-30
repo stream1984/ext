@@ -1,5 +1,5 @@
 var test = require("test");
-var Rx = require("vertx-js/rx");
+var Rx = require("rx.vertx");
 var eb = vertx.eventBus();
 var consumer = eb.localConsumer("the-address");
 var events = [];
@@ -23,7 +23,7 @@ var observer = Rx.Observer.create(
   }
 );
 
-var observable = Rx.toObservable(consumer);
+var observable = Rx.Observable.fromReadStream(consumer);
 observable.subscribe(observer);
 eb.send("the-address", "msg1");
 eb.send("the-address", "msg2");

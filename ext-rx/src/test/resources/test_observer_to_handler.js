@@ -1,5 +1,5 @@
 var test = require("test");
-var Rx = require("vertx-js/rx");
+var Rx = require("rx.vertx");
 var eb = vertx.eventBus();
 eb.consumer("the_address").handler(function(msg) {
   msg.reply("pong");
@@ -16,5 +16,5 @@ var observer = Rx.Observer.create(
     test.testComplete();
   }
 );
-var handler = Rx.toHandler(observer);
+var handler = observer.toHandler();
 eb.send("the_address", {}, {}, handler);
