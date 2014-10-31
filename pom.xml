@@ -29,6 +29,7 @@
     <module>ext-metrics</module>
     <module>ext-jca</module>
     <module>ext-rx</module>
+    <module>ext-cluster-zookeeper</module>
   </modules>
 
   <parent>
@@ -238,6 +239,7 @@
           </systemPropertyVariables>
           <argLine>-server -Xms128m -Xmx1024m -XX:NewRatio=2</argLine>
           <excludes>
+            <exclude>**/ZKClustered*.java</exclude>
             <exclude>**/ScratchPad.java</exclude>
           </excludes>
         </configuration>
